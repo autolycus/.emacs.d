@@ -2,7 +2,7 @@
   "Color theme by Oivvio Polite, created 2002-02-01.  Good for tty display."
   (interactive)
   (color-theme-install
-   '(color-theme-tty-dark
+   '(color-theme-tty-dark-modified
      ((background-color . "black")
       (background-mode . dark)
       (border-color . "blue")

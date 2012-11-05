@@ -1,15 +1,14 @@
 
-; Solarized Color Schemes
-;(add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized")
-;(require 'color-theme-solarized)
 
-;(color-theme-solarized-dark)
 
+; Setup Color Theme 
+; (require 'color-theme-install)
+
+(require 'color-theme)
 (load-file "~/.emacs.d/modified-tty-dark.el")
 (color-theme-tty-dark-modified)
 ; (color-theme-tty-dark)
 
-;(load-file "~/.emacs.d/dark-emacs-theme.el")
 
 ; Set Tab stops 
 (setq-default indent-tabs-mode nil)
@@ -27,6 +26,12 @@
   "Hook function to setup c style files"
   (setq c-default-style "linux")
   (setq c-basic-offset 2)
+  ; Setup some code folding keys 
+  (local-set-key (kbd "C-c <right>") 'hs-show-block)
+  (local-set-key (kbd "C-c <left>") 'hs-hide-block) 
+  (local-set-key (kbd "C-c <up>") 'hs-hide-all)
+  (local-set-key (kbd "C-c <down>") 'hs-show-all)
+  (hs-minor-mode t)
 )
 
 (add-hook 'c-mode-common-hook 'c-code-setup-hook)
@@ -82,6 +87,3 @@
 (global-set-key (kbd "<backtab>") 'remove-indents)
 
 (global-set-key (kbd "C-c g") 'goto-line)
-
-(setq mac-command-modifier 'meta)
-; (setq mac-command-key-is-meta t)
