@@ -20,12 +20,15 @@
 (delete-selection-mode 1)
 
 ; Setup the proper indentation method 
-; that I like.
+; that I like for C, C++ 
 
 (defun c-code-setup-hook() 
   "Hook function to setup c style files"
   (setq c-default-style "linux")
   (setq c-basic-offset 2)
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'arglist-intro +)
+  (c-set-offset 'arglist-close +)
   ; Setup some code folding keys 
   (local-set-key (kbd "C-c <right>") 'hs-show-block)
   (local-set-key (kbd "C-c <left>") 'hs-hide-block) 
@@ -33,21 +36,10 @@
   (local-set-key (kbd "C-c <down>") 'hs-show-all)
   (hs-minor-mode t)
 )
-
+; Callback function that gets invoked on 
+; all C files. 
 (add-hook 'c-mode-common-hook 'c-code-setup-hook)
 
-;(c-set-offset 'substatement-open 0)
-;(c-set-offset 'substatement-intro 0)
-
-;; (defun my-c-code-common-hook() 
-;;   " Invoked whenever we are starting a C/ C++ file " 
-;;   (setq c-default-style "linux")
-;;   (setq c-basic-offset 2) 
-
-;;   (setq c++-tab-always-indent t) 
-;;  )
-
-;;(add-hook 'c-mode-common-hook 'my-c-code-common-hook)
 
 (defun remove-indents-region()
   " Remove TAB-WIDTH spaces from the beginning of a set of lines 
@@ -87,3 +79,15 @@
 (global-set-key (kbd "<backtab>") 'remove-indents)
 
 (global-set-key (kbd "C-c g") 'goto-line)
+
+; CEDET - code completion and such 
+
+;(require 'cedet)
+;(load-library 'cedet)
+;(load-file "/usr
+; (require 'cedet-common/cedet.el) 
+;(global-ede-mode 1)
+;(semantic-load-enable-code-helpers)
+
+;(setq boost-base-dir "/usr/include/boost")
+;(semantic-add-system-include boost-base-dir 'c++-mode)
