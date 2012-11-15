@@ -8,7 +8,11 @@
 (load-file "~/.emacs.d/modified-tty-dark.el")
 (color-theme-tty-dark-modified)
 ; (color-theme-tty-dark)
+  
+;(load-file "/usr/share/emacs/site-list/xcscope.el")
+(require 'xcscope)
 
+(require 'git)
 
 ; Set Tab stops 
 (setq-default indent-tabs-mode nil)
@@ -24,18 +28,31 @@
 
 (defun c-code-setup-hook() 
   "Hook function to setup c style files"
-  (setq c-default-style "linux")
-  (setq c-basic-offset 2)
-  (c-set-offset 'substatement-open 0)
-  (c-set-offset 'arglist-intro +)
-  (c-set-offset 'arglist-close +)
   ; Setup some code folding keys 
   (local-set-key (kbd "C-c <right>") 'hs-show-block)
   (local-set-key (kbd "C-c <left>") 'hs-hide-block) 
   (local-set-key (kbd "C-c <up>") 'hs-hide-all)
   (local-set-key (kbd "C-c <down>") 'hs-show-all)
   (hs-minor-mode t)
+  ; Setup cscope hotkeys 
+  (local-set-key (kbd "C-c s s") 'cscope-find-this-symbol)
+  (local-set-key (kbd "C-c s d") 'cscope-find-global-definition)
+  (local-set-key (kbd "C-c s G") 'cscope-find-global-definition-no-prompting)
+  (local-set-key (kbd "C-c s c") 'cscope-find-functions-calling-this-function)
+  (local-set-key (kbd "C-c s C") 'cscope-find-called-functions)
+  (local-set-key (kbd "C-c s t") 'cscope-find-this-text-string)
+  (local-set-key (kbd "C-c s e") 'cscope-find-egrep-pattern) 
+  (local-set-key (kbd "C-c s f") 'cscope-find-this-file) 
+  (local-set-key (kbd "C-c s i") 'cscope-find-files-including-file)
+  ; Setup appropriate tab configuration that I like 
+  (setq c-default-style "linux")
+  (setq c-basic-offset 2)
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'arglist-intro '+)
+  (c-set-offset 'arglist-close '+)
+  
 )
+
 ; Callback function that gets invoked on 
 ; all C files. 
 (add-hook 'c-mode-common-hook 'c-code-setup-hook)
