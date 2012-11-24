@@ -50,12 +50,39 @@
   (c-set-offset 'substatement-open 0)
   (c-set-offset 'arglist-intro '+)
   (c-set-offset 'arglist-close '+)
+  (c-set-offset 'inline-open 0)
+  (c-set-offset 'inline-close 0)
   
 )
+
 
 ; Callback function that gets invoked on 
 ; all C files. 
 (add-hook 'c-mode-common-hook 'c-code-setup-hook)
+
+; Python Call backs 
+
+(defun cja-python-cb() 
+  "Callback that get invoked when a python file gets opened"
+  ; I don't know why this doesn't work 
+  (message "Starting Python!")
+  (setq python-guess-indent nil)
+  (setq indent-tabs-mode t)
+  (setq tab-width 2)
+  (message "setting python indent")
+  (setq python-indent 2)
+  (setq python-indent-offset 2)
+  ; Setup some code folding keys 
+  (local-set-key (kbd "C-c <right>") 'hs-show-block)
+  (local-set-key (kbd "C-c <left>") 'hs-hide-block) 
+  (local-set-key (kbd "C-c <up>") 'hs-hide-all)
+  (local-set-key (kbd "C-c <down>") 'hs-show-all)
+  (hs-minor-mode t)
+)
+
+;(custom-set-variables '(python-guess-indent nil) '(python-indent 2))
+
+(add-hook 'python-mode-hook 'cja-python-cb)
 
 
 (defun remove-indents-region()
@@ -97,6 +124,9 @@
 
 (global-set-key (kbd "C-c g") 'goto-line)
 
+;(global-set-key (kbd "s-down") 'page-down) 
+;(global-set-key (kbd "s-up") 'page-up)
+
 ; CEDET - code completion and such 
 
 ;(require 'cedet)
@@ -108,3 +138,25 @@
 
 ;(setq boost-base-dir "/usr/include/boost")
 ;(semantic-add-system-include boost-base-dir 'c++-mode)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Templates 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-skeleton cja-cpp-header
+  "CPP Header Skeleton"
+  "\n"          ; Not sure why this \n is required but doesn't work otherwise
+  "// -*- c++ -*- \n" 
+  "/*! \\file \n"
+  " *  \\author \n"
+  " *  \\date \n"
+  " * \n" 
+  " *  \\description \n" 
+  " *    \n"
+  " *    \n"
+  " * \\copyright <NAME> (C) 2012 - ALL RIGHTS RESERVED\n" 
+  " */ " 
+)
+  
