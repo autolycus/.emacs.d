@@ -126,6 +126,8 @@
 
 ;(global-set-key (kbd "s-down") 'page-down) 
 ;(global-set-key (kbd "s-up") 'page-up)
+(global-set-key (kbd "M-<left>") 'beginning-of-line) 
+(global-set-key (kbd "M-<right>") 'end-of-line) 
 
 ; CEDET - code completion and such 
 
