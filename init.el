@@ -55,6 +55,13 @@
   
 )
 
+; Define a minor that allows a window to be stuck in 
+; place such that it is not allowed to move. 
+; Useful for GDB 
+(define-minor-mode sticky-buffer-mode
+  "Make the current window always display this buffer."
+  nil " sticky" nil
+  (set-window-dedicated-p (selected-window) sticky-buffer-mode))
 
 ; Callback function that gets invoked on 
 ; all C files. 
