@@ -1,0 +1,14 @@
+Source: .emacs.d
+Section: callendorph
+Priority: extra
+Maintainer: Carl Allendorph <callendorph@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~), emacs, emacs-goodies-el, 
+	cscope, cscope-el, git-el
+Standards-Version: 3.9.4
+Homepage: http://github.com/autolycus/.emacs.d
+Vcs-Git: git@github.com:autolycus/.emacs.d.git
+
+Package: cja-.emacs.d
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, emacs
+Description: CJA emacs config files 
