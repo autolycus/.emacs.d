@@ -55,6 +55,20 @@
   
 )
 
+
+
+(defun js-code-setup-hook()
+  "Hook Function to setup javascript style files" 
+  (local-set-key (kbd "C-c <right>") 'hs-show-block)
+  (local-set-key (kbd "C-c <left>") 'hs-hide-block) 
+  (local-set-key (kbd "C-c <up>") 'hs-hide-all)
+  (local-set-key (kbd "C-c <down>") 'hs-show-all)
+  (hs-minor-mode t)
+  (setq js-indent-level 2)
+)
+
+(add-hook 'js-mode-common-hook 'js-code-setup-hook)
+
 ; Define a minor that allows a window to be stuck in 
 ; place such that it is not allowed to move. 
 ; Useful for GDB 
@@ -74,7 +88,7 @@
   ; I don't know why this doesn't work 
   (message "Starting Python!")
   (setq python-guess-indent nil)
-  (setq indent-tabs-mode t)
+  ;(setq indent-tabs-mode t)
   (setq tab-width 2)
   (message "setting python indent")
   (setq python-indent 2)
