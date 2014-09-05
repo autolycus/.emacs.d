@@ -18,7 +18,7 @@
      (bold-italic ((t (:underline t :foreground "white"))))
      (calendar-today-face ((t (:underline t))))
      (diary-face ((t (:foreground "red"))))
-     (font-lock-builtin-face ((t (:foreground "blue"))))
+     (font-lock-builtin-face ((t (:foreground "#3DB8F5"))))
      (font-lock-comment-face ((t (:foreground "cyan"))))
      (font-lock-constant-face ((t (:foreground "magenta"))))
      (font-lock-function-name-face ((t (:foreground "cyan"))))
