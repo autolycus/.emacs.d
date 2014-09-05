@@ -15,7 +15,7 @@
 (require 'git)
 
 ; Set Tab stops 
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode 1)
 (setq-default tab-width 2)
 (setq indent-line-function 'insert-tab)
 
