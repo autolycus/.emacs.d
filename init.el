@@ -23,6 +23,7 @@
 ; number of lines and then delete them. 
 (delete-selection-mode 1)
 
+
 ; Setup the proper indentation method 
 ; that I like for C, C++ 
 
@@ -105,6 +106,7 @@
 
 (add-hook 'python-mode-hook 'cja-python-cb)
 
+	
 
 (defun remove-indents-region()
   " Remove TAB-WIDTH spaces from the beginning of a set of lines 
@@ -149,6 +151,59 @@
 ;(global-set-key (kbd "s-up") 'page-up)
 (global-set-key (kbd "M-<left>") 'beginning-of-line) 
 (global-set-key (kbd "M-<right>") 'end-of-line) 
+
+
+(defun create-bitmask-def(INDEX)
+	" Add a new Bitmask Definition for a particular pin in a 
+    register of an embedded device.
+  "
+	(interactive "p")
+	(if mark-active
+		(let (bp bp_val bm bm_val MASKNAME (rb (region-beginning)) (re (region-end)))
+		  (setq MASKNAME (buffer-substring-no-properties rb re))
+			(delete-region rb re)
+			(setq bp (format "%s_bp" MASKNAME))
+			(setq bp_val (format "(%d)" INDEX))
+			(setq bm (format "%s_bm" MASKNAME))
+			(setq bm_val (format "(BM(%s))" bp))
+			(insert (format "#define %-33s" bp))
+			(insert (format "%s\n" bp_val))
+			(insert (format "#define %-33s" bm))
+			(insert (format "%s\n" bm_val))
+			)
+		(error "mark not active!")
+	)
+)
+
+
+(global-set-key (kbd "C-c b") 'create-bitmask-def)
+
+
+(defun create-groupmask-def(INDEX)
+	" Add a new Bitmask Definition for a particular pin in a 
+    register of an embedded device.
+  "
+	(interactive "p")
+	(if mark-active
+		(let (bp bp_val bm bm_val MASKNAME (rb (region-beginning)) (re (region-end)))
+		  (setq MASKNAME (buffer-substring-no-properties rb re))
+			(delete-region rb re)
+			(setq bp (format "%s_gp" MASKNAME))
+			(setq bp_val (format "(%d)" INDEX))
+			(setq bm (format "%s_gm" MASKNAME))
+			(setq bm_val (format "(GM(0xFF,%s))" bp))
+			(insert (format "#define %-33s" bp))
+			(insert (format "%s\n" bp_val))
+			(insert (format "#define %-33s" bm))
+			(insert (format "%s\n" bm_val))
+			(insert (format "#define %s(x) \\\n" MASKNAME))
+			(insert (format "\t\t(GM(x,%s) & %s)\n" bp bm))
+			)
+		(error "mark not active!")
+	)
+)
+
+(global-set-key (kbd "C-c m") 'create-groupmask-def)
 
 ; CEDET - code completion and such 
 
